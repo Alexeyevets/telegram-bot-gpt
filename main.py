@@ -6,6 +6,8 @@ from youtube_audio_downloader import download_audio, start
 from user_manager import add_user_command, remove_user_command, list_users_command, block_user_command, unblock_user_command, send_message_command, broadcast_message_command
 from gpt_chat import register_handlers as register_gpt_handlers, CHAT_CONTEXT, get_gpt_response, end_chat_due_to_inactivity, generate_image
 from user_database import get_user_by_id, increment_request_count, check_and_reset_request_counts, add_column_if_not_exists, add_user
+from dotenv import load_dotenv
+import os
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
@@ -13,8 +15,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-TOKEN = '7250364439:AAEo9bXrJJ9eQwXF3WVf3-BqoprsE5Te-F4'
-AUTHORIZED_USER_ID = 929527704
+load_dotenv()
+
+TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+AUTHORIZED_USER_ID = int(os.getenv('AUTHORIZED_USER_ID'))
 
 image_prompt_context = {}
 
